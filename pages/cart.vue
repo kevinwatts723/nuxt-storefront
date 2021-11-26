@@ -2,9 +2,13 @@
   <div id="detailed-cart">
     <SfBreadcrumbs class="breadcrumbs desktop-only" :breadcrumbs="breadcrumbs" />
     <div class="detailed-cart__title-wrapper">
+<<<<<<< HEAD
       <h3 class="sf-heading__title h3">
         {{ $t("Shopping Cart") }} ({{ cartItems.length }} {{ $t("Items") }})
       </h3>
+=======
+      <h3 class="sf-heading__title h3">Shopping Cart</h3>
+>>>>>>> e7741d7 (detailed cart styles added)
     </div>
     <div class="detailed-cart">
       <div v-if="cartItems.length" class="detailed-cart__aside">
@@ -43,6 +47,7 @@
           <div v-if="cartItems.length" key="detailed-cart" class="collected-product-list">
             <transition-group name="sf-fade" tag="div">
               <KiboCollectedProduct
+<<<<<<< HEAD
                 v-for="cartItem in cartItems"
                 :key="cartItem.id"
                 v-model="cartItem.quantity"
@@ -56,6 +61,16 @@
                 "
                 :options="cartItem.product.options"
                 :supported-fulfillment-types="cartItemFulfillmentTypes(cartItem)"
+=======
+                v-for="product in products"
+                :key="product.id"
+                v-model="product.qty"
+                :purchase-location="selectedLocation"
+                :image="product.image"
+                :title="product.title"
+                :regular-price="product.price.regular && `$${product.price.regular}`"
+                :special-price="product.price.special && `$${product.price.special}`"
+>>>>>>> e7741d7 (detailed cart styles added)
                 class="sf-collected-product--detailed collected-product"
                 @click:remove="removeHandler(product)"
               >
@@ -84,6 +99,7 @@
   </div>
 </template>
 <script>
+<<<<<<< HEAD
 import { SfButton, SfImage, SfHeading, SfBreadcrumbs, SfInput } from "@storefront-ui/vue"
 import { useAsync } from "@nuxtjs/composition-api"
 import { defineComponent } from "@vue/composition-api"
@@ -96,6 +112,15 @@ import {
   storeLocationGetters,
 } from "@/composables"
 import KiboCollectedProduct from "@/components/KiboCollectedProduct.vue"
+=======
+import { SfButton, SfImage, SfHeading, SfBreadcrumbs } from "@storefront-ui/vue"
+import { useAsync } from "@nuxtjs/composition-api"
+import { defineComponent } from "@vue/composition-api"
+import { usePurchaseLocation } from "@/composables"
+import useUiState from "@/composables/useUiState"
+import KiboCollectedProduct from "@/components/KiboCollectedProduct.vue"
+import { storeLocationGetters } from "@/composables/getters"
+>>>>>>> e7741d7 (detailed cart styles added)
 
 export default defineComponent({
   name: "DetailedCart",
@@ -104,11 +129,15 @@ export default defineComponent({
     SfImage,
     SfButton,
     SfHeading,
+<<<<<<< HEAD
     SfInput,
+=======
+>>>>>>> e7741d7 (detailed cart styles added)
     KiboCollectedProduct,
   },
   setup() {
     const { toggleStoreLocatorModal } = useUiState()
+<<<<<<< HEAD
     const { purchaseLocation } = usePurchaseLocation()
     const { cart, load: loadCart } = useCart()
 
@@ -120,23 +149,87 @@ export default defineComponent({
       {
         text: "Cart",
         link: "/cart",
+=======
+    const { purchaseLocation, load: loadPurchaseLocation } = usePurchaseLocation()
+    const breadcrumbs = [
+      {
+        text: "Home",
+        route: {
+          link: "/",
+        },
+      },
+      {
+        text: "Cart",
+        route: {
+          link: "/cart",
+        },
+      },
+    ]
+    const products = [
+      {
+        title: "Hoka Ocean Print",
+        id: "CBB1",
+        image: "https://m.media-amazon.com/images/I/61Tux6Jej-L._UY500_.jpg",
+        price: { regular: "50.00" },
+        configuration: [
+          { name: "Size", value: "XS" },
+          { name: "Color", value: "White" },
+        ],
+        qty: "1",
+      },
+      {
+        title: "Cream Beach Bag Modern Style",
+        id: "CBB2",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNDZCdOLLTDKRvtbZaMGX5l_89OIXjTrAjA&usqp=CAU",
+        price: { regular: "50.00" },
+        configuration: [
+          { name: "Size", value: "XS" },
+          { name: "Color", value: "White" },
+        ],
+        qty: "2",
+      },
+      {
+        title: "Cream Beach Bag Modern Style",
+        id: "CBB3",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNDZCdOLLTDKRvtbZaMGX5l_89OIXjTrAjA&usqp=CAU",
+        price: { regular: "50.00" },
+        configuration: [
+          { name: "Size", value: "XS" },
+          { name: "Color", value: "White" },
+        ],
+        qty: "1",
+>>>>>>> e7741d7 (detailed cart styles added)
       },
     ]
 
     useAsync(async () => {
+<<<<<<< HEAD
       await loadCart()
+=======
+      await loadPurchaseLocation()
+>>>>>>> e7741d7 (detailed cart styles added)
     }, null)
 
     const handleStoreLocatorClick = () => {
       toggleStoreLocatorModal()
     }
 
+<<<<<<< HEAD
+=======
+    const totalItems = computed(() => {
+      return products.reduce((totalItems, product) => totalItems + parseInt(product.qty, 10), 0)
+    })
+
+>>>>>>> e7741d7 (detailed cart styles added)
     const selectedLocation = computed(() => {
       return Object.keys(purchaseLocation.value).length
         ? storeLocationGetters.getName(purchaseLocation.value)
         : "Select My Store"
     })
 
+<<<<<<< HEAD
     const cartItems = computed(() => cartGetters.getItems(cart.value))
     const cartOrder = computed(() => cartGetters.getTotals(cart.value))
 
@@ -151,6 +244,14 @@ export default defineComponent({
       cartOrder,
       handleStoreLocatorClick,
       cartItemFulfillmentTypes,
+=======
+    return {
+      products,
+      breadcrumbs,
+      selectedLocation,
+      totalItems,
+      handleStoreLocatorClick,
+>>>>>>> e7741d7 (detailed cart styles added)
     }
   },
 })
@@ -201,7 +302,11 @@ export default defineComponent({
 
   &__title-wrapper {
     width: 100%;
+<<<<<<< HEAD
     padding: 0 0 var(--spacer-lg) 0;
+=======
+    padding: 0 0 var(--spacer-sm) 0;
+>>>>>>> e7741d7 (detailed cart styles added)
   }
 }
 
