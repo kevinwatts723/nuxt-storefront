@@ -9,9 +9,12 @@ import { useState, useNuxtApp } from "#app"
 export const useUser = () => {
   const nuxt = useNuxtApp()
   const fetcher = nuxt.nuxt2Context.$gqlFetch
-  const user = useState(`use-user-user`, (): User => {
-    return {} as User
-  })
+  const user = useState(
+    `use-user-user`,
+    (): User => {
+      return {} as User
+    }
+  )
   const authCookieName = nuxt.nuxt2Context.$config.userCookieKey
   const isAuthenticated = useState(`use-user-isAuthenticated`, () => false)
   const loading = useState(`use-user-loading`, () => false)
