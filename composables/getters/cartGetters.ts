@@ -9,10 +9,10 @@ export const getCartItemImage = (item: CartItem) => item?.product?.imageUrl
 
 export const getCartItemPrice = (
   item: CartItem
-): { regular: Maybe<number> | undefined; special: Maybe<number> | undefined } => {
+): { regular: Maybe<String> | undefined; special: Maybe<String> | undefined } => {
   return {
-    regular: item.product?.price?.price,
-    special: item.product?.price?.salePrice,
+    regular: `$${item.productDiscounts?.length ? item.subtotal : item.total}`,
+    ...(item.productDiscounts?.length && { special: `$${item.total}` }),
   }
 }
 
@@ -52,9 +52,9 @@ export const getCartItemSku = (item: CartItem) =>
 
 function getTotals(cart: Cart) {
   return {
-    total: cart?.total,
-    subtotal: cart?.subtotal,
-    special: cart?.orderDiscounts ? cart?.discountedSubtotal : cart?.subtotal,
+    total: `$${cart?.orderDiscounts?.length ? cart?.discountedSubtotal : cart?.total}`,
+    subtotal: `$${cart?.subtotal}`,
+    ...(cart?.orderDiscounts.length && { special: `$${cart?.discountedTotal}` }),
   }
 }
 

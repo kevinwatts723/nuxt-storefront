@@ -6,7 +6,7 @@ import { deleteCartItemMutation } from "@/gql/mutations/cart/deleteCartItemMutat
 
 export const useCart = () => {
   const cart = useState(`use-cart-result`, () => {
-    return {}
+    return {} as Cart
   })
   const loading = useState(`use-cart-loading`, () => false)
   const error = useState(`use-cart-error`, () => null)
@@ -97,6 +97,8 @@ export const useCart = () => {
     updateCartItemQuantity,
     removeCartItem,
     load,
+    applyCoupon,
+    removeCoupon,
     cart,
     error,
   }

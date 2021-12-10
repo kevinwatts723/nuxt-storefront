@@ -45,3 +45,37 @@ export type useProductResponse = {
   loading: Ref<boolean>
   error: Ref<string | {}>
 }
+
+export type CrProductOption = {
+  attributeFQN?: String
+  name?: String
+  value?: Object
+}
+
+export type CrProductProperty = {
+  attributeFQN?: String
+  name?: String
+  values?: {
+    value?: String
+  }
+}
+
+export type CrProductPrice = {
+  price?: Number
+  salePrice?: Number
+}
+
+export type CrProduct = {
+  productCode?: String
+  fulfillmentTypesSupported?: [String]
+  name?: String
+  description?: String
+  imageUrl?: String
+  options?: CrProductOption
+  properties?: CrProductProperty
+  sku?: String
+  price?: CrProductPrice
+  categories?: {
+    id: Number
+  }
+}
