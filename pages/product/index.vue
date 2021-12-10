@@ -333,7 +333,7 @@ export default defineComponent({
 
     // Get Fullfillment Options
     const fulfillmentOptions = computed(() =>
-      productGetters.getFullfillmentOptions(product.value, purchaseLocation.value)
+      productGetters.getProductFulfillmentOptions(product.value, purchaseLocation.value)
     )
 
     const selectFulfillmentOption = (selectedOption: string) => {

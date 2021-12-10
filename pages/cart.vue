@@ -170,7 +170,7 @@ export default defineComponent({
     }
 
     const cartItemFulfillmentTypes = (cartItem) => {
-      return cartGetters.getFullfillmentOptions(cartItem, purchaseLocation.value)
+      return cartGetters.getCartFulfillmentOptions(cartItem, purchaseLocation.value)
     }
 
     const applyPromocode = async () => {

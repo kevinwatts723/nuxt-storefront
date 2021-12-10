@@ -68,7 +68,7 @@ export const getOptionSelectedValue = (option: ProductOption) => {
 }
 export const getOptionName = (option: ProductOption): string => option?.attributeDetail?.name || ""
 export const getOptions = (product: Product) => product?.options
-export const getFullfillmentOptions = (product: Product, purchaseLocation: Location) => {
+export const getProductFulfillmentOptions = (product: Product, purchaseLocation: Location) => {
   const nuxt = useNuxtApp()
   const fullfillmentOptions = nuxt.nuxt2Context.$config.fullfillmentOptions
 
@@ -149,7 +149,7 @@ export const productGetters = {
   getOptionName,
   getOptions,
   getSegregatedOptions,
-  getFullfillmentOptions,
+  getProductFulfillmentOptions,
   getCoverImage,
   getProductId,
 }
