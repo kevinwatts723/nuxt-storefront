@@ -1,8 +1,13 @@
-import { updateCartQuantityMutation } from "./../gql/mutations/cart/updateCartMutation"
+import { Cart } from "./types/useCart"
 import { useNuxtApp, useState } from "#app"
 import { getCartQuery } from "@/gql/queries/cart"
-import { addToCartMutation } from "@/gql/mutations"
-import { deleteCartItemMutation } from "@/gql/mutations/cart/deleteCartItemMutation"
+import {
+  addToCartMutation,
+  deleteCartItemMutation,
+  updateCartCouponMutation,
+  updateCartQuantityMutation,
+  deleteCartCouponMutation,
+} from "@/gql/mutations"
 
 export const useCart = () => {
   const cart = useState(`use-cart-result`, () => {
@@ -88,6 +93,31 @@ export const useCart = () => {
     } finally {
       loading.value = false
       cart.value = await getCart()
+    }
+  }
+
+  const applyCoupon = async (couponCode: string) => {
+    try {
+      const response = await fetcher({
+        query: updateCartCouponMutation,
+        variables: { cartId: cart.value?.id, couponCode },
+      })
+      cart.value = response.data.updateCartCoupon
+    } catch (err) {
+      loading.value = false
+    }
+  }
+
+  // TODO
+  const removeCoupon = async (couponCode: string) => {
+    try {
+      const response = await fetcher({
+        query: deleteCartCouponMutation,
+        variables: { cartId: cart.value?.id, couponCode },
+      })
+      cart.value = response.data.updateCartCoupon
+    } catch (err) {
+      loading.value = false
     }
   }
 
